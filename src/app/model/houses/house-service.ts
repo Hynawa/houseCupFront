@@ -2,70 +2,24 @@ import { Injectable } from "@angular/core";
 import { HouseDetails } from "./house-details";
 import { ScoreDetails } from "../scores/score-details";
 import { ScoreService } from "../scores/score-service";
+import { Observable } from "rxjs";
+import { HouseDto } from "./house-dto";
+import { HttpClient } from "@angular/common/http";
+import { HttpConfig } from "../../config/http-config";
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class HouseService {
-    private houses : HouseDetails[] = [
-        {
-            id: 1,
-            name: "Gryffindor",
-            students: [],
-            scores: [],
-            totalScore: 0,
-        },
-        {
-            id: 2,
-            name: "Hufflepuff",
-            students: [],
-            scores: [],
-            totalScore: 0,
-        },
-        {
-            id: 3,
-            name: "Ravenclaw",
-            students: [],
-            scores: [],
-            totalScore: 0,
-        },
-        {
-            id: 4,
-            name: "Slytherin",
-            students: [],
-            scores: [],
-            totalScore: 0,
-        }
-    ];
+    private urlExtension: string = '/house';
 
-    constructor(private scoreService:ScoreService) {
-        for(let value of this.houses) {
-            value.scores = this.assignScore(value.id)
-            value.totalScore = this.getTotalScore(value.scores);
-        };
+    constructor(private http: HttpClient){}
+
+    getHouses(): Observable<HouseDto[]>{
+        return this.http.get<HouseDto[]>(`${HttpConfig.apiUrl}${this.urlExtension}`);
     }
-
-    assignScore(houseId:number) {
-        let scoreList: ScoreDetails[] = this.scoreService.getScoreDetails();
-        let scores: ScoreDetails[] = [];
-        for(let score of scoreList) {
-            if(houseId === score.houseId){
-                scores.push(score)
-            }
-        }
-        return scores;
-    }
-
-    getTotalScore(scores: ScoreDetails[]) {
-        let totalScore: number = 0;
-        for(let value of scores) {
-            totalScore += value.points;
-        }
-        return totalScore;
-    }
-
-    getHousesDetails() : HouseDetails[] {
-        return this.houses;
+    getHouseDetails(): Observable<HouseDetails[]> | null{
+        return null;
     }
 }

@@ -12,22 +12,22 @@ export class FirstPlaceService {
         house: null
     }
 
-    constructor(private houseService:HouseService){
-        this.firstPlace.house = this.getFirstHouse();
-    }
+    // constructor(private houseService:HouseService){
+    //     this.firstPlace.house = this.getFirstHouse();
+    // }
 
-    getFirstHouse():HouseDetails {
-        let houses:HouseDetails[] = this.houseService.getHousesDetails();
-        let bestHouse!: HouseDetails;
-        let maxScore : number = -Infinity;
-        for(let i=0; i<houses.length; i++) {
-            if(houses[i].totalScore > maxScore){
-                maxScore = houses[i].totalScore;
-                bestHouse = houses[i]
-            }
-        }
-        return bestHouse;
-    }
+    // getFirstHouse():HouseDetails {
+    //     let houses:HouseDetails[] = this.houseService.getHousesDetails();
+    //     let bestHouse!: HouseDetails;
+    //     let maxScore : number = -Infinity;
+    //     for(let i=0; i<houses.length; i++) {
+    //         if(houses[i].totalScore > maxScore){
+    //             maxScore = houses[i].totalScore;
+    //             bestHouse = houses[i]
+    //         }
+    //     }
+    //     return bestHouse;
+    // }
 
     getFirstPlace():FirstPlaceDetails {
         return this.firstPlace;
