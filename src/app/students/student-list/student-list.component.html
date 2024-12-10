@@ -1,5 +1,24 @@
-<div id="studentContainer">
-    @for (student of students; track $index) {
-        <app-student-details [detail]="student"></app-student-details>
-    }
-</div>
+<table id="studentsContainer">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>FIRST NAME</th>
+            <th>SURNAME</th>
+            <th>TOTAL SCORE</th>
+            <th>DETTAGLIO</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for(student of students; track student.id){
+            <tr>
+                <td>{{ student.id }}</td>
+                <td>{{ student.firstname }}</td>
+                <td>{{ student.surname }}</td>
+                <td>{{ student.totalScore }}</td>
+                <td>
+                    <a [routerLink]="['/students', student.id]">clicca per il dettaglio</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

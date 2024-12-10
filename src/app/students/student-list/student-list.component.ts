@@ -2,17 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { StudentDetails } from '../../model/students/student-detail';
 import { StudentService } from '../../model/students/student-service';
 import { RouterModule } from '@angular/router';
-import { StudentDetailsComponent } from '../student-details/student-details.component';
+import { StudentDetailsCard } from '../student-details-card/student-details-card.component';
+import { StudentSummary } from '../../model/students/student-summary';
 
 @Component({
   selector: 'app-student-list',
-  imports: [RouterModule, StudentDetailsComponent],
+  imports: [RouterModule],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css'
 })
 export class StudentListComponent implements OnInit{
 
-students!: StudentDetails[];
+students!: StudentSummary[];
 
 constructor(private studentService: StudentService) {
 }
@@ -23,11 +24,15 @@ constructor(private studentService: StudentService) {
     //   this.students = sl;
     // });
 
-    this.students = this.studentService.getStudentDetails();
-
+    this.studentService.getStudents().subscribe({
+      next: sts => {
+        this.students = sts.map(s => {
+          return {...s, totalScore: s.scores.reduce((a, s) => a + s.points, 0)}
+        });
+      },
+      error: er => console.log(er)
+    });
 
     //il subscribe è il modo in cui gestisco il risultato dell'observable, riceve i risultati quando arriveranno
   }
-
-
 }

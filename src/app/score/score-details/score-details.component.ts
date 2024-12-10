@@ -12,6 +12,7 @@ export class ScoreDetailsComponent {
   @Input({
     required: true
   })
-  scrDet: ScoreDetails | null = null;
 
+  scrDet: ScoreDetails | null = null;
+  
 }
