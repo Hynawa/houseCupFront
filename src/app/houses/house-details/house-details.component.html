@@ -1,0 +1,31 @@
+@if (detail) {
+    <article>
+        <div><h2>{{detail.name}}</h2></div>
+        <div>
+            <p></p>
+            <p><span>Id casata: </span> {{detail.id}}</p>
+            <p><span>Punteggio totale: </span> {{detail.totalScore}}</p>
+        </div>
+    </article>
+    @if(firstPlaceDetails) {
+        <article>
+            <div><h2>{{"CASATA VINCITRICE"}}</h2></div>
+            <div>
+                <p>{{firstPlaceDetails.house?.name}}</p>
+                <p>{{firstPlaceDetails.house?.totalScore}}</p>
+            </div>
+        </article>
+    }
+}
+@if (scrDet) {
+        <article> 
+            <div><h2>Punteggio dello studente {{scrDet.studentFullname}}</h2></div>  
+            <div>
+                <p>Id: {{scrDet.id}}</p>
+                <p>Punteggio: {{scrDet.points}}</p>
+                <p>Motivazione: {{scrDet.motivation}}</p>
+                <p>Assegnato il: {{scrDet.assignDate}}</p>
+                <p>Dato da: {{scrDet.teacher}}</p>
+            </div>
+        </article>
+}

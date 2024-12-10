@@ -1,0 +1,10 @@
+<!-- codice per mostrare gli score una volta cliccata la casata-->
+@if (selectedHouse) {
+    @for (score of houseScores; track $index) {
+        @if (selectedHouse.id == score.houseId) {
+            <article> 
+                <app-score-details [scrDet]="score"></app-score-details>
+            </article>
+        }
+    }
+}

@@ -1,0 +1,5 @@
+<div id="studentContainer">
+    @for (student of students; track $index) {
+        <app-student-details [detail]="student"></app-student-details>
+    }
+</div>

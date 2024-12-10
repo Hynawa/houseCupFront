@@ -1,0 +1,36 @@
+<div id="housesContainer">
+    @for (value of houses; track $index) {
+        <div [id]="'house-' + $index" (click)="onHouseClick(value)">
+        <app-house-details [detail]="value"></app-house-details>
+        </div>
+    }
+<!-- Codice per ritornare il vincitore e dargli un css apposito-->
+</div>
+@if(firstPlace.house?.name == "Gryffindor"){
+    <div id="gryffindorWins">
+        <app-house-details [detail]="firstPlace.house"></app-house-details>
+    </div>
+} @else if (firstPlace.house?.name == "Hufflepuff") {
+    <div id="hufflepuffWins">
+        <app-house-details [detail]="firstPlace.house"></app-house-details>
+    </div>
+} @else if (firstPlace.house?.name == "Ravenclaw") {
+    <div id="ravenclawWins">
+        <app-house-details [detail]="firstPlace.house"></app-house-details>
+    </div>
+}@else if (firstPlace.house?.name == "Slytherin") {
+    <div id="slytherinWins">
+        <app-house-details [detail]="firstPlace.house"></app-house-details>
+    </div>
+}
+
+<!-- codice per mostrare gli score una volta cliccata la casata-->
+@if (selectedHouse) {
+    @for (score of houseScores; track $index) {
+        @if (selectedHouse.id == score.houseId) {
+            <article> 
+                <app-house-details [scrDet]="score"></app-house-details>
+            </article>
+        }
+    }
+}
